@@ -1,13 +1,19 @@
 class Pet < ActiveRecord::Base
   belongs_to :shelter
-  has_many :adopters, through: :shelter
+  belongs_to :adopters
 
-  Pet.oldest
-  Pet.max
+  def self.oldest
+    self.all.maximum do |pet|
+      pet.age
+    end
+  end  
 
-  Pet.average_age
-  pet.sum/pet.count
+  def self.average_age
+    Pet.all.sum(:age)/Pet.all.count.to_f
+  end
 
-  
+  def in_dog_years
+    self.species.downcase == 'dog'? self.age * 5 : "Not a dog"
+  end 
 
 end

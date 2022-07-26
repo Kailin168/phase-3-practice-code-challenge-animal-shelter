@@ -4,14 +4,15 @@ class Shelter < ActiveRecord::Base
 
   def current_pets
     self.pets.adopted?.map do |boolean|
-    if self.adopted? == 1
-    return self.pets.name
+      if self.pets.adopted? == false
+      return self.pets
+      end
+    end
   end
 
+
   def adopted_pets
-    self.pets.adopted?.map do |boolean|
-      if self.adopted? == 0
-      return self.pets.name
+    self.pets.where(adopted?: true)
   end
 
 end
