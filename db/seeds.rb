@@ -3,31 +3,103 @@ require "faker"
 puts "seeding..."
 
 10.times do
-  Shelter.create(
+  Shelter.create!(
     name: Faker::Company.name,
     address: Faker::Address.full_address
   )
 end
 
-30.times do
-  Adopter.create(
+10.times do
+  Adopter.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name
   )
 end
 
-40.times do
-  adopted = rand(0..1)
-  adopter = nil
-  adopter = rand(1..30) if (adopted == 1)
+
+# do the join table last cuz you need the two top table to give the information to use for the bottom
+
+
+Pet.create(
+    name: Faker::Creature::Dog.name,
+    age: rand(1..15),
+    species: "cat",
+    adopted?: true,
+    shelter_id: rand(1..10),
+    adopter_id: rand(1..10)
+  )
   Pet.create(
     name: Faker::Creature::Dog.name,
     age: rand(1..15),
-    species: Faker::Creature::Dog.breed,
-    adopted?: adopted,
+    species: "cat",
+    adopted?: false,
     shelter_id: rand(1..10),
-    adopter_id: adopter
+    adopter_id: rand(1..10)
   )
-end
+  Pet.create(
+    name: Faker::Creature::Dog.name,
+    age: rand(1..15),
+    species: "dog",
+    adopted?: true,
+    shelter_id: rand(1..10),
+    adopter_id: rand(1..10)
+  )
+  Pet.create(
+    name: Faker::Creature::Dog.name,
+    age: rand(1..15),
+    species: "dog",
+    adopted?: false,
+    shelter_id: rand(1..10),
+    adopter_id: rand(1..10)
+  )
+  Pet.create(
+    name: Faker::Creature::Dog.name,
+    age: rand(1..15),
+    species: "dog",
+    adopted?: true,
+    shelter_id: rand(1..10),
+    adopter_id: rand(1..10)
+  )
+  Pet.create(
+    name: Faker::Creature::Dog.name,
+    age: rand(1..15),
+    species: "cat",
+    adopted?: false,
+    shelter_id: rand(1..10),
+    adopter_id: rand(1..10)
+  )
+  Pet.create(
+    name: Faker::Creature::Dog.name,
+    age: rand(1..15),
+    species: "cat",
+    adopted?: false,
+    shelter_id: rand(1..10),
+    adopter_id: rand(1..10)
+  )
+  Pet.create(
+    name: Faker::Creature::Dog.name,
+    age: rand(1..15),
+    species: "dog",
+    adopted?: true,
+    shelter_id: rand(1..10),
+    adopter_id: rand(1..10)
+  )
+  Pet.create(
+    name: Faker::Creature::Dog.name,
+    age: rand(1..15),
+    species: "dog",
+    adopted?: false,
+    shelter_id: rand(1..10),
+    adopter_id: rand(1..10)
+  )
+  Pet.create(
+    name: Faker::Creature::Dog.name,
+    age: rand(1..15),
+    species: "dog",
+    adopted?: true,
+    shelter_id: rand(1..10),
+    adopter_id: rand(1..10)
+  )
 
+#farm:Fram.all.sample (this is random generated)
 puts "done!"
